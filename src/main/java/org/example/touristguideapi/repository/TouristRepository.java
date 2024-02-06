@@ -11,13 +11,13 @@ import java.util.List;
 public class TouristRepository {
     private List<TouristAttraction> touristAttractions;
 
-    public TouristRepository(){
+    public TouristRepository() {
         touristAttractions = new ArrayList<>();
         touristAttractions.add(new TouristAttraction("Zoo", "A place where you can see many different animals"));
         touristAttractions.add(new TouristAttraction("Tivoli", "A very popular Amusement park"));
     }
 
-    public List<TouristAttraction> getTouristAttractions(){
+    public List<TouristAttraction> getTouristAttractions() {
         return touristAttractions;
     }
 

@@ -15,7 +15,7 @@ public class TouristController {
 
 
     @GetMapping("/{name}")
-    public ResponseEntity<List<TouristAttraction>> getAttractionName() {
+    public ResponseEntity<List<TouristAttraction>> getAttractionName(@PathVariable String name) {
         List<TouristAttraction> attraction = touristService.getAttraction();
         return new ResponseEntity<>(attraction, HttpStatus.OK);
     }
