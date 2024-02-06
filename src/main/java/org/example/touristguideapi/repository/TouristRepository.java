@@ -26,6 +26,18 @@ public class TouristRepository {
 
     }
 
+    public TouristAttraction getAttractionByName(String name) {
+        int i = 0;
+        while (i < touristAttractions.size()) {
+            if (name.equals(touristAttractions.get(i).getName())){
+                return touristAttractions.get(i);
+            }
+            i++;
+        }
+       return null;
+    }
+
+
     public void updateTouristAttraction(TouristAttraction updatedAttraction) {
 
         for (TouristAttraction touristAttraction : touristAttractions) {

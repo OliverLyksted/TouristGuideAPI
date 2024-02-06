@@ -14,7 +14,11 @@ public List<TouristAttraction> getAttraction(){
     return touristRepository.getTouristAttractions();
 }
 
-public void addAttration(TouristAttraction touristAttraction){
+public TouristAttraction getAttractionByName(String name){
+    return touristRepository.getAttractionByName(name);
+}
+
+public void addAttraction(TouristAttraction touristAttraction){
     touristRepository.addTouristAttraction(touristAttraction);
 }
 public void updateAttraction(TouristAttraction touristAttraction){

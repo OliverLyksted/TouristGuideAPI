@@ -15,15 +15,15 @@ public class TouristController {
 
 
     @GetMapping("/{name}")
-    public ResponseEntity<List<TouristAttraction>> getAttractionName(@PathVariable String name) {
-        List<TouristAttraction> attraction = touristService.getAttraction();
-        return new ResponseEntity<>(attraction, HttpStatus.OK);
+    public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) {
+       TouristAttraction oneAttraction = touristService.getAttractionByName(name);
+        return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
 
     @PostMapping("/add")
     public ResponseEntity<Void> addTouristAttraction(@RequestBody TouristAttraction touristAttraction) {
-        touristService.addAttration(touristAttraction);
-        return new ResponseEntity<>(HttpStatus.OK);
+        touristService.addAttraction(touristAttraction);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/update")
     public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction){
