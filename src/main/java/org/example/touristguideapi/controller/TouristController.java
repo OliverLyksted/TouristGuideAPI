@@ -1,4 +1,5 @@
 package org.example.touristguideapi.controller;
+
 import org.example.touristguideapi.model.TouristAttraction;
 import org.example.touristguideapi.service.TouristService;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,15 @@ import java.util.List;
 public class TouristController {
     private TouristService touristService = new TouristService();
 
+    @GetMapping()
+    public ResponseEntity<List<TouristAttraction>> getAttraction() {
+    List<TouristAttraction> attractions = touristService.getAttraction();
+    return new ResponseEntity<>(attractions, HttpStatus.OK);
+    }
 
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) {
-       TouristAttraction oneAttraction = touristService.getAttractionByName(name);
+        TouristAttraction oneAttraction = touristService.getAttractionByName(name);
         return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
 
@@ -25,14 +31,16 @@ public class TouristController {
         touristService.addAttraction(touristAttraction);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @PutMapping("/update")
-    public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction){
+    public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction) {
         touristService.updateAttraction(touristAttraction);
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
     @DeleteMapping("/delete/{name}")
-    public ResponseEntity<Void> deleteAttraction(@RequestBody TouristAttraction touristAttraction){
+    public ResponseEntity<Void> deleteAttraction(@RequestBody TouristAttraction touristAttraction) {
         touristService.deleteAttraction(touristAttraction);
         return new ResponseEntity<>(HttpStatus.OK);
     }
