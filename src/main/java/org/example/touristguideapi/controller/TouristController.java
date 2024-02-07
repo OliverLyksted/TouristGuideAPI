@@ -40,7 +40,8 @@ public class TouristController {
     }
 
     @DeleteMapping("/delete/{name}")
-    public ResponseEntity<Void> deleteAttraction(@RequestBody TouristAttraction touristAttraction) {
+    public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
+        TouristAttraction touristAttraction = new TouristAttraction(name, "123123123");
         touristService.deleteAttraction(touristAttraction);
         return new ResponseEntity<>(HttpStatus.OK);
     }
