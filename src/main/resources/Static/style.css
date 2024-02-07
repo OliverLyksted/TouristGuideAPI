@@ -2,6 +2,7 @@ Body {
     font-family: "Agency FB";
     background-size: cover;
 }
+
 h1 {
     color: black;
     text-align: center;
@@ -10,17 +11,47 @@ h1 {
     border-bottom: 2px solid black;
 }
 
+h2 {
+    color: black;
+    font-family: "Agency FB";
+    font-size: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    text-align: left;
+    position: absolute;
+    bottom: 10px;
+}
+
 a {
-    color: blue;
-    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    font-family: "Agency FB";
 }
 
 p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 20px;
+    line-height: 0.5;
 }
 
+nav {
+    background-color: white;
+    position: absolute;top: 80px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
 sideav a:hover {
     text-decoration: underline;
+    background-color: white;
 }
+
