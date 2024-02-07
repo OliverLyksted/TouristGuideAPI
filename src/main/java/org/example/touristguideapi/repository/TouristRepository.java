@@ -13,7 +13,7 @@ public class TouristRepository {
 
     public TouristRepository() {
         touristAttractions = new ArrayList<>();
-        touristAttractions.add(new TouristAttraction("zoo", "A place where you can see many different animals"));
+        touristAttractions.add(new TouristAttraction("zoo", "The Zoo in Copenhagen is one of the oldest culture institutions in Denmark. The origin of the Zoo dates all the way back to 1859 where it was one of the first zoo's in all of Europe! Today the Zoo is one of the most attractive places for a fun and educational day with either family, friends or even alone. The Zoo has around 1.3 million guests every year, and with more than 4000 different animals and 250 different sorts of animals, it is impossible not to have fun when visiting"));
         touristAttractions.add(new TouristAttraction("tivoli", "A very popular Amusement park"));
     }
 
