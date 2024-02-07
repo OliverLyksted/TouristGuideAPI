@@ -13,8 +13,8 @@ public class TouristRepository {
 
     public TouristRepository() {
         touristAttractions = new ArrayList<>();
-        touristAttractions.add(new TouristAttraction("Zoo", "A place where you can see many different animals"));
-        touristAttractions.add(new TouristAttraction("Tivoli", "A very popular Amusement park"));
+        touristAttractions.add(new TouristAttraction("zoo", "A place where you can see many different animals"));
+        touristAttractions.add(new TouristAttraction("tivoli", "A very popular Amusement park"));
     }
 
     public List<TouristAttraction> getTouristAttractions() {
