@@ -41,7 +41,7 @@ public class TouristController {
 
     @DeleteMapping("/delete/{name}")
     public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
-        TouristAttraction touristAttraction = new TouristAttraction(name, "123123123");
+        TouristAttraction touristAttraction = new TouristAttraction(name, "");
         touristService.deleteAttraction(touristAttraction);
         return new ResponseEntity<>(HttpStatus.OK);
     }

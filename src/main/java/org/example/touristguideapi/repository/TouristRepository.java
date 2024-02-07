@@ -41,10 +41,10 @@ public class TouristRepository {
     public void updateTouristAttraction(TouristAttraction updatedAttraction) {
 
         for (TouristAttraction touristAttraction : touristAttractions) {
-            if (touristAttraction.getDescription().equals(updatedAttraction.getDescription())) {
+            if (touristAttraction.getName().equals(updatedAttraction.getName())) {
                 touristAttraction.setDescription(updatedAttraction.getDescription());
             }
-            break;
+
 
         }
 
