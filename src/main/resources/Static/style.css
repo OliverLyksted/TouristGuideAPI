@@ -1,5 +1,5 @@
 Body {
-font-family: "Agency FB";
+    font-family: "Agency FB";
 
 }
 
@@ -7,5 +7,19 @@ h1 {
     color: black;
     text-align: center;
     font-family: "Agency FB";
-    font-size: xxx-large;
+    font-size: 36px;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+a:hover {
+    text-decoration: underline;
 }
