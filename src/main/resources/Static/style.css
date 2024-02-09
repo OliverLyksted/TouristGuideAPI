@@ -15,41 +15,40 @@ h1 {
 h2 {
     color: black;
     font-family: "Agency FB";
-    font-size: 25px;
-    margin-top: 35px;
+    font-size: 30px;
     text-align: center;
-
 }
-
+h3 {
+    color: black;
+}
 h4 {
     color: black;
-    font-family: "Agency FB";
-    font-size: 18px;
-    margin-top: 10px;
+    font-size:22px;
+    margin-top: 80px;
     text-align: left;
-    padding: 10px;
-
+    line-height: 1.5;
 }
 
 footer {
-    background-color: lavender;
+    background-color: lightblue;
     color: black;
     padding: 0px;
-    text-align: left;
-    position: absolute;
-    bottom: 2px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 a {
     color: black;
-    font-size: 25px;
-    font-family: "Agency FB";
+    font-size: 20px;
+
 }
 
 p {
     font-size: 20px;
-    line-height: 1;
-
+    line-height: 0.5;
+    color: black;
 }
 
 nav {
@@ -64,18 +63,20 @@ ul {
     padding: 0;
     overflow: hidden;
 }
-@media screen and (max-width: 768px) {
-    nav {
-        padding: 5px; /* Adjust padding for smaller screens */
-    }
 
-    a {
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-
-    sideav a:hover {
-        text-decoration: underline;
-        background-color: white;
-    }
+sideav a:hover {
+    text-decoration: underline;
+    background-color: white;
 }
+
+@media screen and (max-height: 768px) {
+    nav {
+        padding: 5px;
+    }
+    a {
+        padding: 10px;
+    }
+
+}
+
 
