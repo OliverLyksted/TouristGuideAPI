@@ -41,6 +41,7 @@ p {
 nav {
     background-color: white;
     position: absolute;top: 80px;
+    border-style: solid;
 }
 
 ul {
