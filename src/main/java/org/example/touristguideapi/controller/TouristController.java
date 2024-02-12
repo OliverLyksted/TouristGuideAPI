@@ -12,12 +12,16 @@ import java.util.List;
 @Controller
 @RequestMapping("/attractions")
 public class TouristController {
-    private TouristService touristService = new TouristService();
+    private TouristService touristService;
+
+    public TouristController(TouristService touristService) {
+        this.touristService = touristService;
+    }
 
     @GetMapping()
     public ResponseEntity<List<TouristAttraction>> getAttraction() {
-    List<TouristAttraction> attractions = touristService.getAttraction();
-    return new ResponseEntity<>(attractions, HttpStatus.OK);
+        List<TouristAttraction> attractions = touristService.getAttraction();
+        return new ResponseEntity<>(attractions, HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
