@@ -1,0 +1,28 @@
+
+Body {
+    font-family: "Agency FB";
+    background-size: cover;
+    background-color: lavender;
+}
+.header{
+    background-color: #30323d;
+    text-align: center;
+    padding: 20px;
+
+}
+
+.headline1 {
+    color: black;
+    text-align: center;
+    font-family: "Agency FB";
+    font-size: 36px;
+    border-bottom: 2px solid black;
+}
+
+.headline2 {
+    color: black;
+    text-align: center;
+    font-family: "Agency FB";
+    font-size: 28px;
+    border-bottom: 2px solid black;
+}
