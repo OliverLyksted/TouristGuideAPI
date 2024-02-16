@@ -9,23 +9,29 @@
 <header>
     <div class="header">
         <div class="headlines">
-            <h1 class="headline1"> Velkommen til København</h1>
-            <h2 class="headline2">Her finder du alle de forskellige attraktioner i København :)</h2>
+            <h1 class="headline1"> Her finder du alle de forskellige attraktioner i København :)</h1>
+            </div>
+    </div>
+
             <table>
                 <thead>
                 <tr>
-                    <th>Navn</th>
-                    <th>Beskrivelse</th>
+                    <th>Name</th>
+                    <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="touristAttraction : ${attractions}">
                     <td th:text="${touristAttraction.name}"></td>
                     <td th:text="${touristAttraction.description}"></td>
+                    <td><button>Tags</button></td>
                 </tr>
                 </tbody>
             </table>
+
+
         </div>
+
     </div>
 </header>
 </body>

@@ -32,11 +32,11 @@ public class TouristController {
         return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
 
-    @GetMapping("/add")
+ /*   @GetMapping("/add")
     public String addTouristAttraction(Model model) {
         model.addAttribute("touristAttraction", new TouristAttraction());
         return "addAttraction";
-    }
+    } */
 
     @PutMapping("/update")
     public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction) {
