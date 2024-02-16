@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Tilføj en ny turistattraktion</h1>
+<br>
 <form action="#" method="post" th:action="@{/attractions/save}" th:object="${touristAttraction}">
     <label for="name">Navn:</label>
     <input type="text" id="name" name="name" th:field="*{name}" required>
@@ -17,14 +18,33 @@
 
 
     <label for="city">By:</label>
-    <textarea id="city" name="city" th:field="*{city}" required></textarea>
+    <select id="city" name="city" th:field="*{city}" required>
+        <option value="Copenhagen">Copenhagen</option>
+    </select>
 
+    <label>Tags:</label>
+    <div>
+        <input type="checkbox" id="tag1" name="tags" value="tag1" th:checked="${touristAttraction.tags.contains('tag1')}">
+        <label for="tag1">Børnevenlig</label>
 
-    <label for="tags">Tags:</label>
-    <textarea id="tags" name="tags" th:field="*{tags}" required></textarea>
+        <input type="checkbox" id="tag2" name="tags" value="tag2" th:checked="${touristAttraction.tags.contains('tag2')}">
+        <label for="tag2">Gratis</label>
 
+        <input type="checkbox" id="tag3" name="tags" value="tag3" th:checked="${touristAttraction.tags.contains('tag3')}">
+        <label for="tag3">Kunst</label>
 
-    <button type="submit">Gem</button>
+        <input type="checkbox" id="tag4" name="tags" value="tag4" th:checked="${touristAttraction.tags.contains('tag4')}">
+        <label for="tag4">Museum</label>
+
+        <input type="checkbox" id="tag5" name="tags" value="tag5" th:checked="${touristAttraction.tags.contains('tag5')}">
+        <label for="tag5">Natur</label>
+
+    </div>
+    <div>
+        <a href="/attractions"><button>OK</button></a>
+        <button type="submit">Fortryd</button>
+
+    </div>
 </form>
 </body>
 </html>
