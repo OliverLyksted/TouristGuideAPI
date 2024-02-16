@@ -11,7 +11,15 @@
         <div class="headlines">
             <h1 class="headline1"> Velkommen til København</h1>
             <h2 class="headline2">Her finder du alle de forskellige attraktioner i København :)</h2>
+            <div th:each="touristAttraction : ${attractions}">
+                <p>Tourist attraktionens navn: <span th:text="${touristAttraction.name}"></span></p>
+                <p>Tourist attraktionens beskrivelse: <span th:text="${touristAttraction.description}"></span></p>
+            </div>
+
+
+
         </div>
+
     </div>
 </header>
 </body>
