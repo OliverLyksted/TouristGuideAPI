@@ -73,7 +73,27 @@ public class TouristRepository {
             return null;
 
     }
+    public List<String> getCities() {
+        List<String> cities = new ArrayList<>();
+        for (TouristAttraction attraction : touristAttractions) {
+            String city = attraction.getCity();
+            if (!cities.contains(city)) {
+                cities.add(city);
+            }
+        }
+        return cities;
+    }
+
+    public List<String> getTags() {
+        List<String> tags = new ArrayList<>();
+        for (TouristAttraction attraction : touristAttractions) {
+            tags.addAll(attraction.getTags());
+        }
+        return tags;
+    }
 }
+
+
 
 
 

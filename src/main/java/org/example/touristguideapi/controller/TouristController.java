@@ -32,11 +32,11 @@ public class TouristController {
         return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
 
- /*   @GetMapping("/add")
+    @GetMapping("/add")
     public String addTouristAttraction(Model model) {
         model.addAttribute("touristAttraction", new TouristAttraction());
         return "addAttraction";
-    } */
+    }
 
     @PutMapping("/update")
     public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction) {
@@ -58,6 +58,23 @@ public class TouristController {
         List<String> tags = touristService.getTagsForAttraction(name);
         model.addAttribute("tags", tags);
         return "tags";
+    }
+
+    @PostMapping("/save")
+    public String saveTouristAttraction(@ModelAttribute TouristAttraction touristAttraction, Model model) {
+        TouristAttraction newAttraction = new TouristAttraction(
+                touristAttraction.getName(),
+                touristAttraction.getDescription(),
+                touristAttraction.getCity(),
+                touristAttraction.getTags()
+        );
+
+        touristService.addAttraction(newAttraction);
+
+        List<TouristAttraction> attractions = touristService.getAttraction();
+        model.addAttribute("attractions", attractions);
+
+        return "attractionList";
     }
 
 

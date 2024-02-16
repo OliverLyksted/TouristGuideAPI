@@ -16,6 +16,12 @@ public class TouristAttraction {
         this.city = city;
         this.tags = tags;
     }
+    public TouristAttraction(){
+        this.name= "";
+        this.description= "";
+        this.city = "";
+        this.tags = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
