@@ -25,16 +25,17 @@ public class TouristController {
         model.addAttribute("attractions", attractions);
         return "attractionList";
     }
+
     @GetMapping("/{name}")
     public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) {
         TouristAttraction oneAttraction = touristService.getAttractionByName(name);
         return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addTouristAttraction(@RequestBody TouristAttraction touristAttraction) {
-        touristService.addAttraction(touristAttraction);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("/add")
+    public String addTouristAttraction(Model model) {
+        model.addAttribute("touristAttraction", new TouristAttraction());
+        return "addAttraction";
     }
 
     @PutMapping("/update")
@@ -44,12 +45,21 @@ public class TouristController {
 
     }
 
-    @DeleteMapping("/delete/{name}")
-    public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
-        TouristAttraction touristAttraction = new TouristAttraction(name, "");
-        touristService.deleteAttraction(touristAttraction);
-        return new ResponseEntity<>(HttpStatus.OK);
+    /* @DeleteMapping("/delete/{name}")
+     public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
+         TouristAttraction touristAttraction = new TouristAttraction(name, "","",);
+         touristService.deleteAttraction(touristAttraction);
+         return new ResponseEntity<>(HttpStatus.OK);
+     }
+
+     */
+    @GetMapping("/{name}/tags")
+    public String showAttractionTags(@PathVariable String name, Model model) {
+        List<String> tags = touristService.getTagsForAttraction(name);
+        model.addAttribute("tags", tags);
+        return "tags";
     }
+
 
 }
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Attraktion Tags</title>
+  <link th:href="@{/tags.css}" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="header">
+    <div class="headlines">
+      <h1 class="headline1"> Tags for attraktion</h1>
+      <ul>
+        <li th:each="tag : ${tags}" th:text="${tag}"></li>
+      </ul>
+      <a href="/attractions">Tilbage til oversigten</a>
+    </div>
+  </div>
+</header>
+</body>
+</html>
