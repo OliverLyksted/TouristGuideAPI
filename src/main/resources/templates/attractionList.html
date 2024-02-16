@@ -24,10 +24,12 @@
                 <tr th:each="touristAttraction : ${attractions}">
                     <td th:text="${touristAttraction.name}"></td>
                     <td th:text="${touristAttraction.description}"></td>
-                    <td><button>Tags</button></td>
+                    <td> <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> <button>Tags</button> </a></td>
                 </tr>
                 </tbody>
             </table>
+    <br>
+    <a href="/attractions/add"><button>Tilbage til oversigten</button></a>
 
 
         </div>

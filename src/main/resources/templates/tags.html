@@ -8,11 +8,14 @@
 <header>
   <div class="header">
     <div class="headlines">
-      <h1 class="headline1"> Tags for attraktion</h1>
-      <ul>
-        <li th:each="tag : ${tags}" th:text="${tag}"></li>
-      </ul>
-      <a href="/attractions">Tilbage til oversigten</a>
+      <h1 class="headline1" th:text="'Tags for ' + ${name}"></h1>
+      <table>
+        <tr th:each="tag : ${tags}">
+        <td th:text="${tag}"></td>
+        </tr>
+      </table>
+      <br>
+      <a href="/attractions"><button>Tilbage til oversigten</button></a>
     </div>
   </div>
 </header>
