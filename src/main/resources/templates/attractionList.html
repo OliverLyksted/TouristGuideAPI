@@ -10,31 +10,42 @@
     <div class="header">
         <div class="headlines">
             <h1 class="headline1"> Her finder du alle de forskellige attraktioner i København :)</h1>
-            </div>
+        </div>
     </div>
 
-            <table>
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="touristAttraction : ${attractions}">
-                    <td th:text="${touristAttraction.name}"></td>
-                    <td th:text="${touristAttraction.description}"></td>
-                    <td> <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}"> <button>Tags</button> </a></td>
-                </tr>
-                </tbody>
-            </table>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>City</th>
+            <th>Tags</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="touristAttraction : ${attractions}">
+            <td th:text="${touristAttraction.name}"></td>
+            <td th:text="${touristAttraction.description}"></td>
+            <td th:text="${touristAttraction.city}"></td>
+            <td>
+                <ul>
+                    <li th:each="tag : ${touristAttraction.tags}" th:text="${tag}"></li>
+                </ul>
+            </td>
+            <td>
+                <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}">
+                    <button>Tags</button>
+                </a>
+                <a th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}">
+                    <button>Edit</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     <br>
     <a href="/attractions/add"><button>Tilføj en ny attraktion</button></a>
-
-
-        </div>
-
-    </div>
 </header>
 </body>
 </html>

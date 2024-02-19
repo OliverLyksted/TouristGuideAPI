@@ -38,12 +38,19 @@ public class TouristController {
         return "addAttraction";
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Void> updateAttraction(@RequestBody TouristAttraction touristAttraction) {
-        touristService.updateAttraction(touristAttraction);
-        return new ResponseEntity<>(HttpStatus.OK);
-
+    @GetMapping("/{name}/edit")
+    public String editAttraction(@PathVariable String name, Model model) {
+        TouristAttraction attraction = touristService.getAttractionByName(name);
+        model.addAttribute("touristAttraction", attraction);
+        return "editAttraction";
     }
+
+    @PostMapping("/update")
+    public String updateAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+        touristService.updateAttraction(touristAttraction);
+        return "redirect:/attractions";
+    }
+
 
     /* @DeleteMapping("/delete/{name}")
      public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
