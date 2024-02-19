@@ -15,8 +15,6 @@
     <label for="description">Beskrivelse:</label>
     <textarea id="description" name="description" th:field="*{description}" required></textarea>
 
-
-
     <label for="city">By:</label>
     <select id="city" name="city" th:field="*{city}" required>
         <option value="Copenhagen">Copenhagen</option>
@@ -38,13 +36,12 @@
 
         <input type="checkbox" id="tag5" name="tags" value="tag5" th:checked="${touristAttraction.tags.contains('tag5')}">
         <label for="tag5">Natur</label>
-
     </div>
-    <div>
-        <a href="/attractions"><button>OK</button></a>
-        <button type="submit">Fortryd</button>
 
-    </div>
+    <button type="submit">OK</button>
+    <a href="/attractions" th:href="@{/attractions}">
+        <button type="button">Fortryd</button>
+    </a>
 </form>
 </body>
 </html>

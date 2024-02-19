@@ -73,6 +73,7 @@ public class TouristRepository {
             return null;
 
     }
+
     public List<String> getCities() {
         List<String> cities = new ArrayList<>();
         for (TouristAttraction attraction : touristAttractions) {
