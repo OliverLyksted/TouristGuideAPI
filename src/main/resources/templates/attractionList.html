@@ -19,7 +19,6 @@
             <th>Name</th>
             <th>Description</th>
             <th>City</th>
-            <th>Tags</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -29,17 +28,26 @@
             <td th:text="${touristAttraction.description}"></td>
             <td th:text="${touristAttraction.city}"></td>
             <td>
-                <ul>
-                    <li th:each="tag : ${touristAttraction.tags}" th:text="${tag}"></li>
-                </ul>
+                <div class="action-button">
+                    <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}">
+                        <button>Tags</button>
+                    </a>
+                </div>
+            </td>
+
+            <td>
+                <div class="action-button">
+                    <a th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}">
+                        <button>Edit</button>
+                    </a>
+                </div>
             </td>
             <td>
-                <a th:href="@{/attractions/{name}/tags(name=${touristAttraction.name})}">
-                    <button>Tags</button>
-                </a>
-                <a th:href="@{/attractions/{name}/edit(name=${touristAttraction.name})}">
-                    <button>Edit</button>
-                </a>
+                <div class="action-button">
+                    <a th:href="@{/attractions/{name}/delete(name=${touristAttraction.name})}">
+                        <button>Delete</button>
+                    </a>
+                </div>
             </td>
         </tr>
         </tbody>
