@@ -1,16 +1,17 @@
 
 Body {
-    font-family: "Agency FB";
+    font-family: "Calibri";
     background-size: cover;
     background-color: lavender;
 }
-.header{
+.header{/
+    251587420
     padding: 20px;
 }
 .headline1 {
     color: black;
     text-align: center;
-    font-family: "Agency FB";
+    font-family: "Calibri";
     font-size: 36px;
     border-bottom: 2px solid black;
 }
@@ -18,44 +19,39 @@ Body {
 .headline2 {
     color: black;
     text-align: center;
-    font-family: "Agency FB";
+    font-family: "Calibri";
     font-size: 28px;
     border-bottom: 2px solid black;
 }
 
 th {
-    padding: 10px;
+    padding: 25px;
+    max-width: 150px;
     background-color: white;
     border-collapse: collapse;
 }
 tr {
+
     background-color: #f9f9f9;
 }
 
 td {
-    padding: 8px;
+    padding: 25px;
     border-collapse: collapse;
-    white-space: nowrap;
+
 }
 
-
 button {
-    background-color: #4CAF50;
+    background-color: green;
     color: white;
-    padding: 6px 10px;
+    padding: 3px 5px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     display: inline-block;
 }
-.action-button {
-    display: inline-block;
-    border: 1px solid;
-    border-radius: 3px;
-    overflow: hidden;
-}
 
 button:hover {
-    background-color: #45a049;
+    background-color:lightgreen;
 }
 
