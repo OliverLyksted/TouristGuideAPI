@@ -31,8 +31,8 @@ public class TouristService {
         touristRepository.updateTouristAttraction(touristAttraction);
     }
 
-    public void deleteAttractionByName(String name) {
-        touristRepository.deleteAttractionByName(name);
+    public void deleteAttraction(String name) {
+        touristRepository.deleteAttraction(name);
     }
     public List<String> getTagsForAttraction(String name){
         return touristRepository.getTagsForAttraction(name);

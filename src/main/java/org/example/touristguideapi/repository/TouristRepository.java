@@ -43,6 +43,8 @@ public class TouristRepository {
         for (TouristAttraction touristAttraction : touristAttractions) {
             if (touristAttraction.getName().equals(updatedAttraction.getName())) {
                 touristAttraction.setDescription(updatedAttraction.getDescription());
+                touristAttraction.setTags(updatedAttraction.getTags());
+                touristAttraction.setCity(updatedAttraction.getCity());
             }
 
 
@@ -50,13 +52,21 @@ public class TouristRepository {
 
     }
 
-    public void deleteAttractionByName(String name) {
-        TouristAttraction attractionToDelete = getAttractionByName(name);
-        if (attractionToDelete != null) {
-            touristAttractions.remove(attractionToDelete);
+    public void deleteAttraction(String name) {
+        int i =0;
+        TouristAttraction Attraction;
+        while (i<touristAttractions.size()) {
+            if (name.equals(touristAttractions.get(i).getName())) {
+                Attraction = touristAttractions.get(i);
+                touristAttractions.remove(Attraction);
+
+
+            }
+            i++;
         }
     }
-    public List<String> getTagsForAttraction(String name) {
+
+        public List<String> getTagsForAttraction(String name) {
         TouristAttraction attraction = getAttractionByName(name);
         if (attraction != null) {
             return attraction.getTags();

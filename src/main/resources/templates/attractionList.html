@@ -42,18 +42,21 @@
                     </a>
                 </div>
             </td>
+
             <td>
-                <div class="action-button">
-                    <a th:href="@{/attractions/{name}/delete(name=${touristAttraction.name})}">
-                        <button>Delete</button>
-                    </a>
-                </div>
+                <form th:action="@{'/attractions/delete/' + ${touristAttraction.name}}" method="post" th:method="post">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+
             </td>
+
         </tr>
         </tbody>
     </table>
     <br>
-    <a href="/attractions/add"><button>Tilføj en ny attraktion</button></a>
+    <a href="/attractions/add">
+        <button>Tilføj en ny attraktion</button>
+    </a>
 </header>
 </body>
 </html>

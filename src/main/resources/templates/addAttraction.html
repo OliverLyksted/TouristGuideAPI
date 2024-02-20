@@ -21,10 +21,13 @@
     </select>
 
     <label>Tags:</label>
-    <div th:each="tag : ${tags}">
-        <input type="checkbox" id="tag" name="tags" th:value="${tag}" th:checked="${touristAttraction.tags.contains(tag)}">
-        <label th:for="${'tag' + #strings.substring(tag, 0, 1)}" th:text="${tag}"></label>
+    <div class="horizontal-tags">
+        <span th:each="tag : ${tags}">
+            <input type="checkbox" id="tag" name="tags" th:value="${tag}" th:checked="${touristAttraction.tags.contains(tag)}">
+            <label th:for="${'tag' + #strings.substring(tag, 0, 1)}" th:text="${tag}"></label>
+        </span>
     </div>
+
     <button type="submit">OK</button>
     <a href="/attractions" th:href="@{/attractions}">
         <button type="button">Fortryd</button>

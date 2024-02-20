@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title> Ændring af informationer </title>
+  <link th:href="@{/updateAttraction.css}" rel="stylesheet">
 </head>
 <body>
+<h1>Ændring af informationer</h1>
+<br>
+<form action="#" method="post" th:action="@{/attractions/update}" th:object="${touristAttraction}">
+  <label for="name">Navn:</label>
+  <input type="text" id="name" name="name" th:field="*{name}" required>
 
+  <label for="description">Beskrivelse:</label>
+  <textarea id="description" name="description" th:field="*{description}" required></textarea>
+
+  <label for="city">By:</label>
+  <select id="city" name="city" th:field="*{city}" required>
+    <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
+  </select>
+
+  <label>Tags:</label>
+  <div class="horizontal-tags">
+        <span th:each="tag : ${tags}">
+            <input type="checkbox" id="tag" name="tags" th:value="${tag}" th:checked="${touristAttraction.tags.contains(tag)}">
+            <label th:for="${'tag' + #strings.substring(tag, 0, 1)}" th:text="${tag}"></label>
+        </span>
+  </div>
+
+  <button type="submit">OK</button>
+  <a href="/attractions" th:href="@{/attractions}">
+    <button type="button">Fortryd</button>
+  </a>
+</form>
 </body>
 </html>
