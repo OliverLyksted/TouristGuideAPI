@@ -50,21 +50,12 @@ public class TouristRepository {
 
     }
 
-    public void deleteAttraction(TouristAttraction deleteAttraction) {
-        int foundIndex = -1;
-
-        for (int i = 0; i < touristAttractions.size(); i++) {
-            if (deleteAttraction.getName().equals(touristAttractions.get(i).getName())) {
-                foundIndex = i;
-
-                if (foundIndex != -1) {
-                    touristAttractions.remove(foundIndex);
-                }
-            }
-
+    public void deleteAttractionByName(String name) {
+        TouristAttraction attractionToDelete = getAttractionByName(name);
+        if (attractionToDelete != null) {
+            touristAttractions.remove(attractionToDelete);
         }
     }
-
     public List<String> getTagsForAttraction(String name) {
         TouristAttraction attraction = getAttractionByName(name);
         if (attraction != null) {
@@ -75,24 +66,15 @@ public class TouristRepository {
     }
 
     public List<String> getCities() {
-        List<String> cities = new ArrayList<>();
-        for (TouristAttraction attraction : touristAttractions) {
-            String city = attraction.getCity();
-            if (!cities.contains(city)) {
-                cities.add(city);
-            }
-        }
-        return cities;
+        return List.of("Copenhagen", "Aarhus", "Odense", "Aalborg");
     }
 
     public List<String> getTags() {
-        List<String> tags = new ArrayList<>();
-        for (TouristAttraction attraction : touristAttractions) {
-            tags.addAll(attraction.getTags());
-        }
-        return tags;
+        return List.of("Underholdning", "Familie", "Restaurant", "Koncert", "Gratis", "Kunst", "Museum", "Natur");
+
     }
 }
+
 
 
 

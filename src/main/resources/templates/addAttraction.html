@@ -17,27 +17,14 @@
 
     <label for="city">By:</label>
     <select id="city" name="city" th:field="*{city}" required>
-        <option value="Copenhagen">Copenhagen</option>
+        <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
     </select>
 
     <label>Tags:</label>
-    <div>
-        <input type="checkbox" id="tag1" name="tags" value="tag1" th:checked="${touristAttraction.tags.contains('tag1')}">
-        <label for="tag1">Børnevenlig</label>
-
-        <input type="checkbox" id="tag2" name="tags" value="tag2" th:checked="${touristAttraction.tags.contains('tag2')}">
-        <label for="tag2">Gratis</label>
-
-        <input type="checkbox" id="tag3" name="tags" value="tag3" th:checked="${touristAttraction.tags.contains('tag3')}">
-        <label for="tag3">Kunst</label>
-
-        <input type="checkbox" id="tag4" name="tags" value="tag4" th:checked="${touristAttraction.tags.contains('tag4')}">
-        <label for="tag4">Museum</label>
-
-        <input type="checkbox" id="tag5" name="tags" value="tag5" th:checked="${touristAttraction.tags.contains('tag5')}">
-        <label for="tag5">Natur</label>
+    <div th:each="tag : ${tags}">
+        <input type="checkbox" id="tag" name="tags" th:value="${tag}" th:checked="${touristAttraction.tags.contains(tag)}">
+        <label th:for="${'tag' + #strings.substring(tag, 0, 1)}" th:text="${tag}"></label>
     </div>
-
     <button type="submit">OK</button>
     <a href="/attractions" th:href="@{/attractions}">
         <button type="button">Fortryd</button>

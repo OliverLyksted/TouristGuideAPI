@@ -34,7 +34,15 @@ public class TouristController {
 
     @GetMapping("/add")
     public String addTouristAttraction(Model model) {
-        model.addAttribute("touristAttraction", new TouristAttraction());
+        TouristAttraction touristAttraction = new TouristAttraction();
+
+        List<String> cities = touristService.getCities();
+        List<String> tags = touristService.getTags();
+
+        model.addAttribute("cities", cities);
+        model.addAttribute("tags", tags);
+        model.addAttribute("touristAttraction", touristAttraction);
+
         return "addAttraction";
     }
 
@@ -42,7 +50,7 @@ public class TouristController {
     public String editAttraction(@PathVariable String name, Model model) {
         TouristAttraction attraction = touristService.getAttractionByName(name);
         model.addAttribute("touristAttraction", attraction);
-        return "editAttraction";
+        return "updateAttraction";
     }
 
     @PostMapping("/update")
@@ -52,14 +60,13 @@ public class TouristController {
     }
 
 
-    /* @DeleteMapping("/delete/{name}")
-     public ResponseEntity<Void> deleteAttraction(@PathVariable String name) {
-         TouristAttraction touristAttraction = new TouristAttraction(name, "","",);
-         touristService.deleteAttraction(touristAttraction);
-         return new ResponseEntity<>(HttpStatus.OK);
-     }
+    @PostMapping("/{name}/delete")
+    public String deleteAttraction(@PathVariable String name) {
+        touristService.deleteAttractionByName(name);
+        return "redirect:/attractions";
+    }
 
-     */
+
     @GetMapping("/{name}/tags")
     public String showAttractionTags(@PathVariable String name, Model model) {
         List<String> tags = touristService.getTagsForAttraction(name);
@@ -69,22 +76,14 @@ public class TouristController {
 
     @PostMapping("/save")
     public String saveTouristAttraction(@ModelAttribute TouristAttraction touristAttraction, Model model) {
-        TouristAttraction newAttraction = new TouristAttraction(
-                touristAttraction.getName(),
-                touristAttraction.getDescription(),
-                touristAttraction.getCity(),
-                touristAttraction.getTags()
-        );
-
-        touristService.addAttraction(newAttraction);
+        touristService.addAttraction(touristAttraction);
 
         List<TouristAttraction> attractions = touristService.getAttraction();
         model.addAttribute("attractions", attractions);
 
         return "attractionList";
+
     }
-
-
 }
 
 
