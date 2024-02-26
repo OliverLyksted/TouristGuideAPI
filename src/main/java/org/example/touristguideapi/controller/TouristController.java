@@ -88,7 +88,7 @@ public class TouristController {
         List<TouristAttraction> attractions = touristService.getAttraction();
         model.addAttribute("attractions", attractions);
 
-        return "attractionList";
+        return "redirect:/attractions";
 
     }
 }
