@@ -43,7 +43,7 @@ class TouristControllerTest {
     }
 
     @Test
-    void createTouristAttractionForm() throws Exception {
+    void createTouristAttraction() throws Exception {
         mockMvc.perform(get("/attractions/add"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("cities", Matchers.empty()))
