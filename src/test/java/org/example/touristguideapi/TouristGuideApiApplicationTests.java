@@ -27,4 +27,5 @@ class TouristGuideApiApplicationTests {
         assertThat(repository).isNull();
     }
 
+
 }
