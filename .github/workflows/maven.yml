@@ -28,6 +28,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
+        env:
+          JDBC_DATABASE_URL: $-{{secrets.JDBC_DATABASE_URL}}
+          JDBC_USERNAME: ${{secrets.JDBC.USERNAME}}
+          JDBC_PASSWORD: ${{secrets.JDBC.PASSWORD}}
         run: mvn -B test
 
   qodana:
