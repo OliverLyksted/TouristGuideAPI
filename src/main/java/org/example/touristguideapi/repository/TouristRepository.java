@@ -4,6 +4,8 @@ package org.example.touristguideapi.repository;
 import org.example.touristguideapi.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
+import java.sql.*;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,20 @@ public class TouristRepository {
         touristAttractions.add(touristAttraction);
 
     }
+
+
+    public void getAllAttractions() throws SQLException {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/emp_dept", "root", "root5578")) {
+            String SQL = "SELECT * FROM touristattraction";
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(SQL);
+            while ( rs.next()){
+
+            }
+
+        }
+    }
+
 
     public TouristAttraction getAttractionByName(String name) {
         int i = 0;
@@ -53,9 +69,9 @@ public class TouristRepository {
     }
 
     public void deleteAttraction(String name) {
-        int i =0;
+        int i = 0;
         TouristAttraction Attraction;
-        while (i<touristAttractions.size()) {
+        while (i < touristAttractions.size()) {
             if (name.equals(touristAttractions.get(i).getName())) {
                 Attraction = touristAttractions.get(i);
                 touristAttractions.remove(Attraction);
@@ -66,7 +82,7 @@ public class TouristRepository {
         }
     }
 
-        public List<String> getTagsForAttraction(String name) {
+    public List<String> getTagsForAttraction(String name) {
         TouristAttraction attraction = getAttractionByName(name);
         if (attraction != null) {
             return attraction.getTags();
