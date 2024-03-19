@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -27,7 +28,7 @@ public class TouristController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) {
+    public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) throws SQLException {
         TouristAttraction oneAttraction = touristService.getAttractionByName(name);
         return new ResponseEntity<>(oneAttraction, HttpStatus.OK);
     }
@@ -47,7 +48,7 @@ public class TouristController {
     }
 
     @GetMapping("/{name}/edit")
-    public String editAttraction(@PathVariable String name, Model model) {
+    public String editAttraction(@PathVariable String name, Model model) throws SQLException {
         TouristAttraction attraction = touristService.getAttractionByName(name);
 
         List<String> cities = touristService.getCities();
@@ -76,7 +77,7 @@ public class TouristController {
 
     @GetMapping("/{name}/tags")
     public String showAttractionTags(@PathVariable String name, Model model) {
-        List<String> tags = touristService.getTagsForAttraction(name);
+        List<String> tags = touristService.getTagsForAttractionByName(name);
         model.addAttribute("tags", tags);
         return "tags";
     }

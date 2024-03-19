@@ -5,6 +5,7 @@ import org.example.touristguideapi.model.TouristAttraction;
 import org.example.touristguideapi.repository.TouristRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -34,16 +35,26 @@ public class TouristService {
     public void deleteAttraction(String name) {
         touristRepository.deleteAttraction(name);
     }
-    public List<String> getTagsForAttraction(String name){
-        return touristRepository.getTagsForAttraction(name);
+
+    public List<String> getTagsForAttractionByName(String name) {
+        int attractionId = touristRepository.getAttractionIdByName(name);
+
+        return touristRepository.getTagsForAttraction(attractionId);
     }
-    public List<String> getTags(){
+
+
+
+
+    public List<String> getTags() {
         return touristRepository.getTags();
 
-}
-    public List<String> getCities(){
+    }
+
+    public List<String> getCities() {
         return touristRepository.getCities();
     }
+
+
 }
 
 
