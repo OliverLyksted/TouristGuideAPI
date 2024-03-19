@@ -8,9 +8,10 @@ public class TouristAttraction {
     private String name;
     private String description;
     private String city;
+    private int id;
     private  List<String> tags = new ArrayList<>();
 
-    public TouristAttraction(String name, String description, String city, List<String> tags){
+    public TouristAttraction(int id, String name, String description, String city, List<String> tags){
         this.name=name;
         this.description=description;
         this.city = city;
@@ -52,3 +53,4 @@ public class TouristAttraction {
         this.city = city;
     }
 }
+
