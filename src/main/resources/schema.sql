@@ -22,4 +22,4 @@ CREATE TABLE TouristAttractionTag (
                                       FOREIGN KEY (tourist_attraction_id) REFERENCES TouristAttraction(tourist_id),
                                       FOREIGN KEY (tag_id) REFERENCES Tag(id),
                                       PRIMARY KEY (tourist_attraction_id, tag_id)
-);
+)

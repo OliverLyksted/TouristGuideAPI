@@ -50,16 +50,16 @@ public class TouristController {
     @GetMapping("/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model) throws SQLException {
         TouristAttraction attraction = touristService.getAttractionByName(name);
-
         List<String> cities = touristService.getCities();
         List<String> tags = touristService.getTags();
 
         model.addAttribute("cities", cities);
         model.addAttribute("tags", tags);
-
         model.addAttribute("touristAttraction", attraction);
+
         return "updateAttraction";
     }
+
 
     @PostMapping("/update")
     public String updateAttraction(@ModelAttribute TouristAttraction touristAttraction) {

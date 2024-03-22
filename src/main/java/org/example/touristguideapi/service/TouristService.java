@@ -44,7 +44,6 @@ public class TouristService {
 
 
 
-
     public List<String> getTags() {
         return touristRepository.getTags();
 

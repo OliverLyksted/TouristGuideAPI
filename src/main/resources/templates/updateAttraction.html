@@ -16,7 +16,7 @@
   <textarea id="description" name="description" th:field="*{description}" required></textarea>
 
   <label for="city">By:</label>
-  <select id="city" name="city" th:field="*{city}" required>
+  <select id="city" name="city" th:field="*{cityId}" required>
     <option th:each="city : ${cities}" th:value="${city}" th:text="${city}"></option>
   </select>
 
