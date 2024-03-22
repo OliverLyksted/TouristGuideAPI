@@ -8,10 +8,10 @@ public class TouristAttraction {
     private String name;
     private String description;
     private String city;
-    private String cityId;
+    private int cityId;
     private List<String> tags = new ArrayList<>();
 
-    public TouristAttraction(int touristId, String name, String description, String cityId, String city, List<String> tags) {
+    public TouristAttraction(int touristId, String name, String description, int cityId, String city, List<String> tags) {
         this.touristId = touristId;
         this.cityId = cityId;
         this.name = name;
@@ -22,7 +22,7 @@ public class TouristAttraction {
 
     public TouristAttraction() {
         this.touristId = 0;
-        this.cityId = "";
+        this.cityId = 0;
         this.name = "";
         this.description = "";
         this.city = "";
@@ -37,11 +37,11 @@ public class TouristAttraction {
         this.touristId = touristId;
     }
 
-    public String getCityId() {
+    public int getCityId() {
         return cityId;
     }
 
-    public void setCityId(String cityId) {
+    public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 

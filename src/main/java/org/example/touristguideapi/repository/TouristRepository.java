@@ -27,7 +27,7 @@ public class TouristRepository {
                     if (resultSet.next()) {
                         int id = resultSet.getInt("tourist_id");
                         String description = resultSet.getString("description");
-                        String cityId = resultSet.getString("city_id");
+                        int cityId = resultSet.getInt("city_id");
 
                         String city = getCityById(cityId);
 
@@ -42,6 +42,69 @@ public class TouristRepository {
         }
         return null;
     }
+
+    public void addTouristAttraction(TouristAttraction touristAttraction) {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            String sql = "INSERT INTO TouristAttraction (name, description, city_id) VALUES (?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                statement.setString(1, touristAttraction.getName());
+                statement.setString(2, touristAttraction.getDescription());
+                statement.setInt(3, getCityIdByName(touristAttraction.getCity()));
+                int rowsAffected = statement.executeUpdate();
+                if (rowsAffected == 1) {
+                    try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int generatedId = generatedKeys.getInt(1);
+                            touristAttraction.setTouristId(generatedId);
+                            insertTagsForAttraction(generatedId, touristAttraction.getTags());
+                        }
+                    }
+                } else {
+                    throw new SQLException("Insertion failed, no rows affected.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteAttraction(String name) {
+        String deleteTagsSql = "DELETE FROM TouristAttractionTag WHERE tourist_attraction_id = ?";
+        String deleteAttractionSql = "DELETE FROM TouristAttraction WHERE name = ?";
+
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            int attractionId = getAttractionIdByName(name);
+            try (PreparedStatement deleteTagsStatement = connection.prepareStatement(deleteTagsSql)) {
+                deleteTagsStatement.setInt(1, attractionId);
+                deleteTagsStatement.executeUpdate();
+            }
+
+            try (PreparedStatement deleteAttractionStatement = connection.prepareStatement(deleteAttractionSql)) {
+                deleteAttractionStatement.setString(1, name);
+                deleteAttractionStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void updateTouristAttraction(TouristAttraction updatedAttraction) {
+        String sql = "UPDATE TouristAttraction SET description = ?, city_id = ? WHERE name = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, updatedAttraction.getDescription());
+                statement.setInt(2, getCityIdByName(updatedAttraction.getCity()));
+                statement.setString(3, updatedAttraction.getName());
+                int rowsAffected = statement.executeUpdate();
+                if (rowsAffected > 0) {
+                    updateTagsForAttraction(updatedAttraction.getTouristId(), updatedAttraction.getTags());
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
     public List<String> getTagsForAttraction(int attractionId) {
@@ -64,12 +127,12 @@ public class TouristRepository {
         }
     }
 
-    public String getCityById(String cityId) {
+    public String getCityById(int cityId) {
         String city = null;
         String sql = "SELECT name FROM City WHERE id = ?";
         try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, cityId);
+                statement.setInt(1, cityId);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
                         city = resultSet.getString("name");
@@ -82,71 +145,7 @@ public class TouristRepository {
         return city;
     }
 
-    public void deleteAttraction(String name) {
-        String deleteTagsSql = "DELETE FROM TouristAttractionTag WHERE tourist_attraction_id = ?";
-        String deleteAttractionSql = "DELETE FROM TouristAttraction WHERE name = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
-            int attractionId = getAttractionIdByName(name);
-            try (PreparedStatement deleteTagsStatement = connection.prepareStatement(deleteTagsSql)) {
-                deleteTagsStatement.setInt(1, attractionId);
-                deleteTagsStatement.executeUpdate();
-            }
-
-            try (PreparedStatement deleteAttractionStatement = connection.prepareStatement(deleteAttractionSql)) {
-                deleteAttractionStatement.setString(1, name);
-                deleteAttractionStatement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    public void updateTouristAttraction(TouristAttraction updatedAttraction) {
-        String sql = "UPDATE TouristAttraction SET description = ?, tags = ?, city_id = ? WHERE name = ?";
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, updatedAttraction.getDescription());
-                statement.setString(2, String.join(",", updatedAttraction.getTags()));
-                statement.setString(3, updatedAttraction.getCityId());
-                statement.setString(4, updatedAttraction.getName());
-                System.out.println(updatedAttraction.getCityId());
-                int rowsAffected = statement.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-
-    public void addTouristAttraction(TouristAttraction touristAttraction) {
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
-            String sql = "INSERT INTO TouristAttraction (name, description, city_id) VALUES (?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setString(1, touristAttraction.getName());
-                statement.setString(2, touristAttraction.getDescription());
-                statement.setString(3, touristAttraction.getCityId());
-
-                int rowsAffected = statement.executeUpdate();
-                if (rowsAffected == 1) {
-                    try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                        if (generatedKeys.next()) {
-                            int generatedId = generatedKeys.getInt(1);
-                            touristAttraction.setTouristId(generatedId);
-                        }
-                    }
-                } else {
-                    throw new SQLException("Insertion failed, no rows affected.");
-                }
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public int getAttractionIdByName(String name) {
         String sql = "SELECT tourist_id FROM TouristAttraction WHERE name = ?";
@@ -175,7 +174,7 @@ public class TouristRepository {
                         int id = resultSet.getInt("tourist_id");
                         String name = resultSet.getString("name");
                         String description = resultSet.getString("description");
-                        String cityId = resultSet.getString("city_id");
+                        int cityId = resultSet.getInt("city_id");
                         String cityName = getCityById(cityId);
                         List<String> tags = getTagsForAttraction(id);
                         TouristAttraction attraction = new TouristAttraction(id, name, description,cityId,cityName, tags);
@@ -242,6 +241,67 @@ public class TouristRepository {
         }
         throw new IllegalArgumentException("City with name " + cityName + " not found.");
     }
+    public int getTagIdByName(String tagName) {
+        String sql = "SELECT id FROM Tag WHERE name = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, tagName);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        return resultSet.getInt("id");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        throw new IllegalArgumentException();
+    }
+
+
+
+    public void updateTagsForAttraction(int attractionId, List<String> tags) {
+        String deleteTagsSql = "DELETE FROM TouristAttractionTag WHERE tourist_attraction_id = ?";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            try (PreparedStatement deleteTagsStatement = connection.prepareStatement(deleteTagsSql)) {
+                deleteTagsStatement.setInt(1, attractionId);
+                deleteTagsStatement.executeUpdate();
+            }
+            String insertTagsSql = "INSERT INTO TouristAttractionTag (tourist_attraction_id, tag_id) VALUES (?, ?)";
+            try (PreparedStatement insertTagsStatement = connection.prepareStatement(insertTagsSql)) {
+                for (String tag : tags) {
+                    int tagId = getTagIdByName(tag);
+                    insertTagsStatement.setInt(1, attractionId);
+                    insertTagsStatement.setInt(2, tagId);
+                    insertTagsStatement.addBatch();
+                }
+                insertTagsStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+    public void insertTagsForAttraction(int attractionId, List<String> tags) {
+        String sql = "INSERT INTO TouristAttractionTag (tourist_attraction_id, tag_id) VALUES (?, ?)";
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://touristguidedb.mysql.database.azure.com/touristguide_db", "touristguideTEO", "Database1")) {
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                for (String tag : tags) {
+                    int tagId = getTagIdByName(tag);
+                    statement.setInt(1, attractionId);
+                    statement.setInt(2, tagId);
+                    statement.addBatch();
+                }
+                statement.executeBatch();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
 
